@@ -74,7 +74,7 @@ export const SelectTraderAccounts: FC = () => {
 
     return (
         <div className="flex flex-column justify-center items-center">
-          <h1 className='text-2xl'>Selecting or Creating a Trader Account</h1>
+          <h1 className='text-2xl mr-3'>Selecting or Creating a Trader Account</h1>
           {trgsArr.length > 0 ? (
             <>
               <TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />

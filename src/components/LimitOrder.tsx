@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useManifest, useTrader, dexterity } from 'contexts/DexterityProviders';
 import { notify } from '../utils/notifications';
@@ -8,11 +8,10 @@ import Button from './Button';
 export const PlaceLimitOrder: FC = () => {
     const { publicKey } = useWallet();
     const { manifest } = useManifest();
-    const { trader, selectedProduct, mpgPubkey } = useTrader()
+    const { trader, selectedProduct, mpgPubkey } = useTrader();
     const [price, setPrice] = useState<number | null>(null);
     const [size, setSize] = useState<number | null>(null);
-    const [isLong, setIsLong] = useState<boolean>(false);
-    const [isShort, setIsShort] = useState<boolean>(false);
+    const [orderType, setOrderType] = useState<'Long' | 'Short' | 'None'>('None');
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
 
@@ -23,38 +22,37 @@ export const PlaceLimitOrder: FC = () => {
     }
 
     const handlePlaceOrder = useCallback(async () => {
-        if (!price || !size || !publicKey || !manifest) return;
+        if (!price || !size || !publicKey || !manifest || !selectedProduct) return;
+
+        const priceFraction = dexterity.Fractional.New(price, 0);
+        const sizeFraction = dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent);
 
         try {
             setIsLoading(true);
-            await manifest.updateOrderbooks(new PublicKey(mpgPubkey))
+            await manifest.updateOrderbooks(new PublicKey(mpgPubkey));
             await trader.newOrder(
                 selectedProduct.index,
-                true,
-                dexterity.Fractional.New(price, 0),
-                dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent),
+                orderType === 'Short' ? false : true,
+                priceFraction,
+                sizeFraction,
                 false,
                 new PublicKey(process.env.NEXT_PUBLIC_REFERRER_TRG!),
                 process.env.NEXT_PUBLIC_REFERRER_BPS!,
                 null,
                 null,
                 callbacks
-            )
+            );
             setIsSuccess(true);
         } catch (error: any) {
             setIsSuccess(false);
-            console.error('HeyA ', error)
             notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
         } finally {
+            notify({ type: 'success', message: `${orderType} Order Placed Successfully!` });
             setIsLoading(false);
         }
-    }, [price, size, isLong, publicKey, manifest, trader, selectedProduct]);
+    }, [price, size, orderType, publicKey, manifest, trader, selectedProduct]);
 
-    const [isFormValid, setIsFormValid] = useState(false)
-
-    useEffect(() => {
-        setIsFormValid(price !== null && size !== null && (isShort == null ? isLong === null ? false : true : true))
-    }, [trader, price, size, isShort, isLong])
+    const isFormValid = useMemo(() => price !== null && size !== null && orderType !== 'None', [price, size, orderType]);
 
     return (
         <>
@@ -81,21 +79,21 @@ export const PlaceLimitOrder: FC = () => {
                     <input
                         id="isLongCheckbox"
                         type="checkbox"
-                        checked={isLong}
-                        onChange={(e) => setIsLong(e.target.checked)}
+                        checked={orderType === 'Long'}
+                        onChange={() => setOrderType(orderType === 'Long' ? 'None' : 'Long')}
                     />
                     Long
                 </label>
-                <label className="m-2 text-xl" htmlFor="isLongCheckbox">
+                <label className="m-2 text-xl" htmlFor="isShortCheckbox">
                     <input
                         id="isShortCheckbox"
                         type="checkbox"
-                        checked={isShort}
-                        onChange={(e) => setIsShort(e.target.checked)}
+                        checked={orderType === 'Short'}
+                        onChange={() => setOrderType(orderType === 'Short' ? 'None' : 'Short')}
                     />
                     Short
                 </label>
-                <Button text="🛒 Place Order" onClick={handlePlaceOrder} disabled={!isFormValid || isLoading} className={isFormValid ? 'bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' : ''} isLoading={isLoading} status={isSuccess? 'success' : 'failed'} />
+                <Button text="🛒 Place Order" onClick={handlePlaceOrder} disabled={!isFormValid || isLoading} className={isFormValid ? 'bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' : ''} isLoading={isLoading} status={isSuccess ? 'success' : 'failed'} />
             </div>
         </>
     );
