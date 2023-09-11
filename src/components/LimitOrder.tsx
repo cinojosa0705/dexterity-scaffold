@@ -8,7 +8,7 @@ import Button from './Button';
 export const PlaceLimitOrder: FC = () => {
     const { publicKey } = useWallet();
     const { manifest } = useManifest();
-    const { trader, selectedProduct } = useTrader()
+    const { trader, selectedProduct, mpgPubkey } = useTrader()
     const [price, setPrice] = useState<number | null>(null);
     const [size, setSize] = useState<number | null>(null);
     const [isLong, setIsLong] = useState<boolean>(false);
@@ -27,9 +27,10 @@ export const PlaceLimitOrder: FC = () => {
 
         try {
             setIsLoading(true);
-            await trader.justNewOrder(
+            await manifest.updateOrderbooks(new PublicKey(mpgPubkey))
+            await trader.newOrder(
                 selectedProduct.index,
-                isLong ? isShort ? false : true : true,
+                true,
                 dexterity.Fractional.New(price, 0),
                 dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent),
                 false,
@@ -42,6 +43,7 @@ export const PlaceLimitOrder: FC = () => {
             setIsSuccess(true);
         } catch (error: any) {
             setIsSuccess(false);
+            console.error('HeyA ', error)
             notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
         } finally {
             setIsLoading(false);
