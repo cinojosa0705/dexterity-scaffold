@@ -19,7 +19,7 @@ interface TraderAccountDropdownProps {
 const TraderAccountDropdown: FC<TraderAccountDropdownProps> = ({ accounts, onSelect }) => {
     return (
         <select onChange={(e) => onSelect(e.target.value)} className='text-black text-xl'>
-            <option value="" disabled>Select a Trader Account</option>
+            <option value="default">Select a Trader Account</option>
             {accounts.map((trg, index) => (
                 <option key={index} value={trg.pubkey.toBase58()}>{formatPubKey(trg.pubkey.toBase58())}</option>
             ))}
@@ -63,6 +63,7 @@ export const SelectTraderAccounts: FC = () => {
     }, [fetchTraderAccounts, manifest]);
 
     const handleSelection = useCallback(async (selectedValue: string) => {
+        if (selectedValue == "default") return
         setSelectedTrg(selectedValue);
         console.log({ selectedValue })
         const trader = new dexterity.Trader(manifest, new PublicKey(selectedValue))
