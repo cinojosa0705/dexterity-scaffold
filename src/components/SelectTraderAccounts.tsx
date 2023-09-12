@@ -69,6 +69,7 @@ export const SelectTraderAccounts: FC = () => {
         const trg = await manifest.getTRG(new PublicKey(selectedValue))
         console.log('Huh ', { trg })
         await trader.update()
+        await manifest.updateOrderbooks(new PublicKey(mpgPubkey));
         setTrader(trader)
     }, [manifest, setTrader]);
 

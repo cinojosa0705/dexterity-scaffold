@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import dexterityTs, { DexterityWallet } from '@hxronetwork/dexterity-ts';
 import { ManifestProvider, useManifest, TraderProvider } from './DexterityProviders';
 export const dexterity = dexterityTs
+// import { SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 const ReactUIWalletModalProviderDynamic = dynamic(
     async () =>
@@ -29,6 +30,7 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const wallets = useMemo(
         () => [
+            // new SolflareWalletAdapter(),
             new UnsafeBurnerWalletAdapter(),
         ],
         [network]

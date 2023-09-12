@@ -1,12 +1,12 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
-import dexterityTs, {Manifest, Trader} from '@hxronetwork/dexterity-ts'
+import dexterityTs from '@hxronetwork/dexterity-ts'
 import { useNetworkConfiguration } from "./NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 export const dexterity = dexterityTs
 
 interface ManifestContextProps {
-  manifest: InstanceType<typeof Manifest>;
-  setManifest: React.Dispatch<React.SetStateAction<InstanceType<typeof Manifest>>>; 
+  manifest: InstanceType<typeof dexterity.Manifest>;
+  setManifest: React.Dispatch<React.SetStateAction<InstanceType<typeof dexterity.Manifest>>>; 
 }
 
 const ManifestContext = createContext<ManifestContextProps | undefined>(undefined);
@@ -37,8 +37,8 @@ export interface Product {
 }
 
 interface TraderContextProps {
-  trader: InstanceType<typeof Trader>;
-  setTrader: React.Dispatch<React.SetStateAction<InstanceType<typeof Trader>>>;
+  trader: InstanceType<typeof dexterity.Trader>;
+  setTrader: React.Dispatch<React.SetStateAction<InstanceType<typeof dexterity.Trader>>>;
   mpgPubkey: string;
   setMpgPubkey: React.Dispatch<React.SetStateAction<string>>;
   selectedProduct: Product;

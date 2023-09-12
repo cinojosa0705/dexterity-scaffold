@@ -8,7 +8,7 @@ import Button from './Button';
 export const PlaceLimitOrder: FC = () => {
     const { publicKey } = useWallet();
     const { manifest } = useManifest();
-    const { trader, selectedProduct, mpgPubkey } = useTrader();
+    const { trader, selectedProduct } = useTrader();
     const [price, setPrice] = useState<number | null>(null);
     const [size, setSize] = useState<number | null>(null);
     const [orderType, setOrderType] = useState<'Long' | 'Short' | 'None'>('None');
@@ -29,7 +29,6 @@ export const PlaceLimitOrder: FC = () => {
 
         try {
             setIsLoading(true);
-            await manifest.updateOrderbooks(new PublicKey(mpgPubkey));
             await trader.newOrder(
                 selectedProduct.index,
                 orderType === 'Short' ? false : true,

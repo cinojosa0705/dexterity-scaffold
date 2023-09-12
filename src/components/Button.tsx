@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({ text, disabled, onClick, className, isL
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`group text-md w-60 m-2 btn animate-pulse ${className} ${disabled ? 'bg-gray-300 cursor-not-allowed' : ''}`}
+      className={`group text-md w-60 m-2 btn ${className} ${disabled ? 'bg-gray-300 cursor-not-allowed' : ''}`}
     >
       {displayText}
     </button>
