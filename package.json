@@ -1,7 +1,7 @@
 {
-  "name": "solana-dapp-next",
-  "version": "0.2.0",
-  "author": "Solana Maintainers <maintainers@solana.foundation>",
+  "name": "hxro-dapp",
+  "version": "0.1.0",
+  "author": "ThalesHXRO tg:@ThalesOfMiletus",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -42,5 +42,28 @@
   },
   "engines": {
     "node": ">=16"
-  }
+  },
+  "description": "The Hxro Dexterity dApp Scaffold repos are meant to house good starting scaffolds for ecosystem developers to get up and running quickly with a front-end client UI that integrates several common features found in dApps with some basic usage examples. Wallet Integration. State management. Components examples. Notifications. Setup recommendations.",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cinojosa0705/dexterity-scaffold.git"
+  },
+  "keywords": [
+    "hxro",
+    "dapp",
+    "solana",
+    "derivatives",
+    "web3",
+    "scaffold",
+    "next",
+    "phantom",
+    "solflare",
+    "hxro",
+    "network"
+  ],
+  "bugs": {
+    "url": "https://github.com/cinojosa0705/dexterity-scaffold/issues"
+  },
+  "homepage": "https://github.com/cinojosa0705/dexterity-scaffold#readme"
 }
