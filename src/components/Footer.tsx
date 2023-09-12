@@ -60,23 +60,17 @@ export const Footer: FC = () => {
                         </div>
 
                         <div className="mb-6 items-center mx-auto max-w-screen-lg">
-                            <div className="font-normal capitalize mb-2.5">SOLANA</div>
+                            <div className="font-normal capitalize mb-2.5">HXRO LINKS</div>
 
                             <div className="flex flex-col mb-0 gap-2">
                                 <Link href="https://hxro.network" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Labs
+                                    Website
                                 </Link>
-                                <Link href="https://solana.org" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Foundation
+                                <Link href="https://docs.hxro.network/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Docs
                                 </Link>
-                                <Link href="https://solanamobile.com/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Solana Mobile
-                                </Link>
-                                <Link href="https://solanapay.com/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Solana Pay
-                                </Link>
-                                <Link href="https://solana.org/grants" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Grants
+                                <Link href="https://hxro.finance/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Hxro Finance
                                 </Link>
                             </div>
                         </div>
@@ -85,42 +79,30 @@ export const Footer: FC = () => {
                             <h5 className="font-normal capitalize tracking-tight  mb-2.5">DEVELOPERS</h5>
 
                             <div className="flex flex-col mb-0 gap-2">
-                                <Link href="https://docs.hxro.network/developers" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Documentation
+                                <Link href="https://github.com/Hxro-Network" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Github
                                 </Link>
-                                <Link href="https://github.com/solana-mobile/solana-mobile-stack-sdk" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Mobile SDK
-                                </Link>
-                                <Link href="https://github.com/Hxro-Network/solana-pay" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Pay SDK
-                                </Link>
-                                <Link href="https://solanacookbook.com/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Cookbook
-                                </Link>
-                                <Link href="https://hxro.network/developers/dao" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    DAOs
+                                <Link href="#" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    More coming soon...
                                 </Link>
                             </div>
                         </div>
 
                         <div className="mb-6 items-center mx-auto max-w-screen-lg">
-                            <h5 className="font-normal tracking-tight  mb-2.5">ECOSYSTEM</h5>
+                            <h5 className="font-normal tracking-tight  mb-2.5">SOCIALS</h5>
 
                             <div className="flex flex-col mb-0 gap-2">
-                                <Link href="https://hxro.network/news" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    News
+                                <Link href="https://blog.hxro.com/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Blog
                                 </Link>
-                                <Link href="https://solana.org/validators" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Validators
+                                <Link href="https://forum.hxro.network/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Forum
                                 </Link>
-                                <Link href="https://www.youtube.com/@SolanaFndn" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Youtube
+                                <Link href="https://t.co/NJbd3DIWJV" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Discord
                                 </Link>
-                                <Link href="https://app.realms.today/discover" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Realms
-                                </Link>
-                                <Link href="https://www.solanau.org" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
-                                    Solana U
+                                <Link href="https://twitter.com/HxroNetwork" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                    Twitter
                                 </Link>
                             </div>
                         </div>
