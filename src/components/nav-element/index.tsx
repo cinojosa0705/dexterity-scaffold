@@ -32,8 +32,8 @@ const NavElement = ({
             divRef.current.className = cn(
                 'h-0.5 w-1/4 transition-all duration-300 ease-out',
                 isActive
-                    ? '!w-full bg-gradient-to-l from-green-500 to-yellow-500 '
-                    : 'group-hover:w-1/2 group-hover:bg-green-500',
+                    ? '!w-full bg-gradient-to-l  from-[#80ff7d] to-[#80ff7d] '
+                    : 'group-hover:w-1/2 group-hover:bg-[#80ff7d]',
             );
         }
     }, [isActive]);

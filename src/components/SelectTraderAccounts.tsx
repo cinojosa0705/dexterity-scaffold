@@ -79,12 +79,12 @@ export const SelectTraderAccounts: FC = () => {
           {trgsArr.length > 0 ? (
             <>
               <TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />
-              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' />
+              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
             </>
           ) : (
             <>
-              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' />
-              <Button text="➕ Create New Trader Account" onClick={handleCreateTRG} disabled={!publicKey} className='bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' />
+              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
+              <Button text="➕ Create New Trader Account" onClick={handleCreateTRG} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
             </>
           )}
         </div>

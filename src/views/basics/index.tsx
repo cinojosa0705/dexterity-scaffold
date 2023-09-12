@@ -25,7 +25,7 @@ export const BasicsView: FC = ({ }) => {
   return (
     <div className="md:hero mx-auto p-4">
       <div className="md:hero-content flex flex-col">
-        <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-yellow-500 mt-10 mb-8">
+        <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] mt-10 mb-8">
           Basics
         </h1>
         <div className="text-center">

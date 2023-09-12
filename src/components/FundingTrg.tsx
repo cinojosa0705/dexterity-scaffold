@@ -61,7 +61,7 @@ export const FundingTrader: FC = () => {
 
                 <button
                     onClick={handleDeposit}
-                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
                     disabled={amount === null || isLoading}
                 >
                     {isLoading && depositStatus === 'processing' ? 'Processing...' : depositStatus === 'success' ? 'Success!' : depositStatus === 'failed' ? 'Failed!' : '🏦 Deposit'}
@@ -77,7 +77,7 @@ export const FundingTrader: FC = () => {
 
                 <button
                     onClick={handleWithdraw}
-                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-red-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-[#ff80f2] from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
                     disabled={amount === null || isLoading}
                 >
                     {isLoading && withdrawStatus === 'processing' ? 'Processing...' : withdrawStatus === 'success' ? 'Success!' : withdrawStatus === 'failed' ? 'Failed!' : '💸 Withdraw'}

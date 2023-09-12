@@ -20,7 +20,7 @@ export const ContentContainer: React.FC<Props> = ({ children }) => {
 
         <ul className="p-4 overflow-y-auto menu w-80 bg-base-100 gap-10 sm:flex items-center">
           <li>
-            <Text variant="heading" className='font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-yellow-500 mt-10'>Menu</Text>
+            <Text variant="heading" className='font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] mt-10'>Menu</Text>
           </li>
           <li>
           <NavElement

@@ -8,11 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-image: radial-gradient(
-    circle farthest-side at 50% 100%,rgba(1, 18, 3, 0),
-    rgba(1, 14, 1, 0.6) 36%,
-    rgba(1, 29, 2, 0.6) 55%,
-    rgba(18, 93, 27, 0.4));
+  background-image: url('../../public/hxroBackground.jpg');
 }
 
 a {

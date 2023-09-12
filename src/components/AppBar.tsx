@@ -137,14 +137,14 @@ export const AppBar: React.FC = () => {
             className="btn-gh items-center justify-between md:hidden mr-6"
             onClick={() => setIsNavOpen(!isNavOpen)}>
             <div className="HAMBURGER-ICON space-y-2.5 ml-5">
-              <div className={`h-0.5 w-8 bg-green-600 ${isNavOpen ? 'hidden' : ''}`} />
-              <div className={`h-0.5 w-8 bg-green-600 ${isNavOpen ? 'hidden' : ''}`} />
-              <div className={`h-0.5 w-8 bg-green-600 ${isNavOpen ? 'hidden' : ''}`} />
+              <div className={`h-0.5 w-8 bg-[#80ff7d] ${isNavOpen ? 'hidden' : ''}`} />
+              <div className={`h-0.5 w-8 bg-[#80ff7d] ${isNavOpen ? 'hidden' : ''}`} />
+              <div className={`h-0.5 w-8 bg-[#80ff7d] ${isNavOpen ? 'hidden' : ''}`} />
             </div>
-            <div className={`absolute block h-0.5 w-8 animate-pulse bg-green-600 ${isNavOpen ? "" : "hidden"}`}
+            <div className={`absolute block h-0.5 w-8 animate-pulse bg-[#80ff7d] ${isNavOpen ? "" : "hidden"}`}
               style={{ transform: "rotate(45deg)" }}>
             </div>
-            <div className={`absolute block h-0.5 w-8 animate-pulse bg-green-600 ${isNavOpen ? "" : "hidden"}`}
+            <div className={`absolute block h-0.5 w-8 animate-pulse bg-[#80ff7d] ${isNavOpen ? "" : "hidden"}`}
               style={{ transform: "rotate(135deg)" }}>
             </div>
           </label>

@@ -92,7 +92,7 @@ export const PlaceLimitOrder: FC = () => {
                     />
                     Short
                 </label>
-                <Button text="🛒 Place Order" onClick={handlePlaceOrder} disabled={!isFormValid || isLoading} className={isFormValid ? 'bg-gradient-to-br from-green-500 to-yellow-500 hover:from-white hover:to-purple-300 text-black' : ''} isLoading={isLoading} status={isSuccess ? 'success' : 'failed'} />
+                <Button text="🛒 Place Order" onClick={handlePlaceOrder} disabled={!isFormValid || isLoading} className={isFormValid ? 'bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : ''} isLoading={isLoading} status={isSuccess ? 'success' : 'failed'} />
             </div>
         </>
     );

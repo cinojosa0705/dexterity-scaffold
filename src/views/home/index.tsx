@@ -32,7 +32,7 @@ export const HomeView: FC = ({ }) => {
       <div className="md:hero-content flex flex-col">
         <div className='mt-6'>
         <div className='text-sm font-normal align-bottom text-right text-slate-600 mt-4'>v{pkg.version}</div>
-        <h1 className="text-center text-5xl md:pl-12 font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-yellow-500 mb-4">
+        <h1 className="text-center text-5xl md:pl-12 font-bold text-transparent bg-clip-text bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] mb-4">
           HXRO NEXT
         </h1>
         </div>
@@ -41,7 +41,7 @@ export const HomeView: FC = ({ }) => {
           <p className='text-slate-500 text-2x1 leading-relaxed'>Full-stack Hxro applications made easy.</p>
         </h4>
         <div className="relative group">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-yellowgreen-500 rounded-lg blur opacity-40 animate-tilt"></div>
+          <div className="absolute -inset-0.5 bg-gradient-to-r  to-yellowgreen-500 rounded-lg blur opacity-40 animate-tilt"></div>
           <div className="max-w-xxl mx-auto mockup-code bg-primary border-2 border-[#5252529f] p-6 px-10 my-2">
             <pre data-prefix=">">
               <code className="truncate">{`npx create-solana-dapp <dapp-name> && npm install @hxronetwork/dexterity-ts`} </code>
