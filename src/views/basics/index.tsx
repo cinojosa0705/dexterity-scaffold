@@ -53,7 +53,7 @@ export const BasicsView: FC = ({ }) => {
               </div>
               <div className="col-span-1 md:col-span-1 lg:col-span-1 gap-4">
                 <FundingTrader />
-                <AccountInfo />
+                <div className="mt-4"><AccountInfo /></div>
               </div>
             </div>
           }

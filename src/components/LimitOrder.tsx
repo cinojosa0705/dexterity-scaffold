@@ -17,8 +17,8 @@ export const PlaceLimitOrder: FC = () => {
     const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
 
     const callbacks = {
-        onGettingBlockHashFn: () => notify({ type: 'waiting', message: 'Got BlockHash!' }),
-        onGotBlockHashFn: () => notify({ type: 'success', message: 'Got BlockHash!' }),
+        onGettingBlockHashFn: () => {},
+        onGotBlockHashFn: () => {},
         onConfirm: (txn: string) => notify({ type: 'success', message: 'Order Placed Successfully!', txid: txn })
     }
 
@@ -47,7 +47,7 @@ export const PlaceLimitOrder: FC = () => {
             setIsSuccess(false);
             notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
         } finally {
-            notify({ type: 'success', message: `${orderType} Order Placed Successfully!` });
+            notify({ type: 'success', message: `Limit ${orderType} Order Placed Successfully!` });
             setIsLoading(false);
         }
     }, [price, size, orderType, publicKey, manifest, trader, selectedProduct]);
@@ -108,7 +108,7 @@ export const PlaceLimitOrder: FC = () => {
                     </label>
                 </div>
             </div>
-            
+
             <Button
                 text="🛒 Place Limit Order"
                 onClick={handlePlaceOrder}
