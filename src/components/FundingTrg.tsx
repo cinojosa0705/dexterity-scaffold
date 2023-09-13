@@ -1,13 +1,14 @@
 import React, { FC, useState, useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useManifest, useTrader, dexterity } from 'contexts/DexterityProviders';
+import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
 import { notify } from '../utils/notifications';
 import { PublicKey } from '@solana/web3.js';
 
 export const FundingTrader: FC = () => {
     const { publicKey } = useWallet();
     const { manifest } = useManifest();
-    const { trader, selectedProduct } = useTrader();
+    const { trader } = useTrader();
+    const { selectedProduct } = useProduct()
     const [amount, setAmount] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [depositStatus, setDepositStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
@@ -55,34 +56,39 @@ export const FundingTrader: FC = () => {
     }, [amount, publicKey, manifest, trader, selectedProduct]);
 
     return (
-        <>
-            <div className="flex flex-column justify-center items-center">
-                <h1 className='text-2xl'>Funding Trader</h1>
-
-                <button
-                    onClick={handleDeposit}
-                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
-                    disabled={amount === null || isLoading}
-                >
-                    {isLoading && depositStatus === 'processing' ? 'Processing...' : depositStatus === 'success' ? 'Success!' : depositStatus === 'failed' ? 'Failed!' : '🏦 Deposit'}
-                </button>
-
-                <input
-                    type="number"
-                    placeholder="Amount"
-                    onChange={(e) => setAmount(parseFloat(e.target.value))}
-                    className="m-2 p-2 text-xl text-black"
-                    aria-label="Enter the amount for deposit or withdraw"
-                />
-
-                <button
-                    onClick={handleWithdraw}
-                    className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-[#ff80f2] from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
-                    disabled={amount === null || isLoading}
-                >
-                    {isLoading && withdrawStatus === 'processing' ? 'Processing...' : withdrawStatus === 'success' ? 'Success!' : withdrawStatus === 'failed' ? 'Failed!' : '💸 Withdraw'}
-                </button>
-            </div>
-        </>
-    );
+        <div className="flex flex-col justify-center items-center border border-white rounded-lg p-4 mt-4">
+          <h1 className='text-2xl mb-4'>Funding Trader</h1>
+          
+          <div className="w-full flex flex-col items-center mb-4">
+            <label htmlFor="amountInput" className="text-xl font-semibold mb-1">Amount</label>
+            <input
+              id="amountInput"
+              type="number"
+              placeholder="Amount"
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              className="w-full p-2 rounded-md text-xl text-black border border-gray-300"
+              aria-label="Enter the amount for deposit or withdraw"
+            />
+          </div>
+      
+          <div className="flex justify-center space-x-4 w-full">
+            <button
+              onClick={handleDeposit}
+              className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+              disabled={amount === null || isLoading}
+            >
+              {isLoading && depositStatus === 'processing' ? 'Processing...' : depositStatus === 'success' ? 'Success!' : depositStatus === 'failed' ? 'Failed!' : '🏦 Deposit'}
+            </button>
+            
+            <button
+              onClick={handleWithdraw}
+              className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-[#ff80f2] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+              disabled={amount === null || isLoading}
+            >
+              {isLoading && withdrawStatus === 'processing' ? 'Processing...' : withdrawStatus === 'success' ? 'Success!' : withdrawStatus === 'failed' ? 'Failed!' : '💸 Withdraw'}
+            </button>
+          </div>
+        </div>
+      );
+      
 };

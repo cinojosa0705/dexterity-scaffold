@@ -74,7 +74,6 @@ export const Footer: FC = () => {
                                 </Link>
                             </div>
                         </div>
-
                         <div className="mb-6 items-center mx-auto max-w-screen-lg">
                             <h5 className="font-normal capitalize tracking-tight  mb-2.5">DEVELOPERS</h5>
 

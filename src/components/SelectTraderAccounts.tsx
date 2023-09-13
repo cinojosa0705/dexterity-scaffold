@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useManifest, useTrader, dexterity } from 'contexts/DexterityProviders';
+import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
 import { PublicKey } from '@solana/web3.js';
 import { notify } from "../utils/notifications";
 import { formatPubKey } from 'utils/util';
@@ -32,7 +32,8 @@ export const SelectTraderAccounts: FC = () => {
     const { manifest } = useManifest();  // Assuming createTRG is the function to create a new TRG
     const [trgsArr, setTrgsArr] = useState<TraderAccount[]>([]);
     const [selectedTrg, setSelectedTrg] = useState<string>('');
-    const { mpgPubkey, setTrader } = useTrader()
+    const { setTrader } = useTrader()
+    const { mpgPubkey } = useProduct()
 
     useEffect(() => {
         fetchTraderAccounts();
