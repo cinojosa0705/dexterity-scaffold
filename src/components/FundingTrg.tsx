@@ -57,7 +57,7 @@ export const FundingTrader: FC = () => {
 
     return (
         <div className="flex flex-col justify-center items-center border border-white rounded-lg p-4 mt-4">
-          <h1 className='text-2xl mb-4'>Funding Trader</h1>
+          <h1 className='text-2xl mb-4'>Funding Trader Account</h1>
           
           <div className="w-full flex flex-col items-center mb-4">
             <label htmlFor="amountInput" className="text-xl font-semibold mb-1">Amount</label>
