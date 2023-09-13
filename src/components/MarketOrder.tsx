@@ -4,6 +4,8 @@ import { useManifest, useTrader, dexterity, useProduct } from 'contexts/Dexterit
 import { notify } from '../utils/notifications';
 import { PublicKey } from '@solana/web3.js';
 import Button from './Button';
+import { useNetworkConfiguration } from 'contexts/NetworkConfigurationProvider';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 
 export const PlaceMarketOrder: FC = () => {
     const { publicKey } = useWallet();
@@ -15,6 +17,8 @@ export const PlaceMarketOrder: FC = () => {
     const [orderType, setOrderType] = useState<'Long' | 'Short' | 'None'>('None');
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+    const { networkConfiguration } = useNetworkConfiguration();
+    const network = networkConfiguration as WalletAdapterNetwork;
 
     const callbacks = {
         onGettingBlockHashFn: () => {},
@@ -27,6 +31,7 @@ export const PlaceMarketOrder: FC = () => {
 
         const priceFraction = dexterity.Fractional.New(orderType === 'Short' ? markPrice - ((markPrice * slippage) / 100) : markPrice + ((markPrice * slippage) / 100), 0);
         const sizeFraction = dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent);
+        const referralTrg = network === 'devnet' ? process.env.NEXT_PUBLIC_REFERRER_TRG_DEVNET! : process.env.NEXT_PUBLIC_REFERRER_TRG_MAINNET!
 
         try {
             setIsLoading(true);
@@ -36,8 +41,8 @@ export const PlaceMarketOrder: FC = () => {
                 priceFraction,
                 sizeFraction,
                 false,
-                new PublicKey(process.env.NEXT_PUBLIC_REFERRER_TRG!),
-                process.env.NEXT_PUBLIC_REFERRER_BPS!,
+                new PublicKey(referralTrg),
+                Number(process.env.NEXT_PUBLIC_REFERRER_BPS!),
                 null,
                 null,
                 callbacks
