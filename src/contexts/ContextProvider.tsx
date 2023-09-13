@@ -46,6 +46,7 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
 
     useMemo(async () => {
+        if (!publicKey) return
         const DexWallet: DexterityWallet = {
             publicKey: publicKey!,
             signTransaction,

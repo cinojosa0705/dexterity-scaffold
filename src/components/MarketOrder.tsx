@@ -59,7 +59,7 @@ export const PlaceMarketOrder: FC = () => {
             <h1 className='text-2xl mb-4'>Place a Market Order</h1>
 
             <div className="w-full flex flex-col items-center">
-                <label htmlFor="slippageInput" className="text-xl font-semibold mb-1">Price</label>
+                <label htmlFor="slippageInput" className="text-xl font-semibold mb-1">Slippage %</label>
                 <input
                     id="slippageInput"
                     type="number"
