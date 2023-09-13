@@ -149,7 +149,7 @@ export const AppBar: React.FC = () => {
             </div>
           </label>
           <div>
-            <span className="absolute block h-0.5 w-12 bg-zinc-600 rotate-90 right-14"></span>
+            <div className="absolute block h-0.5 w-12 bg-zinc-600 rotate-90 right-14"></div>
           </div>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="btn btn-square btn-ghost text-right mr-4">

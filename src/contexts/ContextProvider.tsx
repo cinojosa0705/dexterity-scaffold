@@ -4,7 +4,7 @@ import {
     UnsafeBurnerWalletAdapter
 } from '@solana/wallet-adapter-wallets';
 import { Cluster, clusterApiUrl } from '@solana/web3.js';
-import { FC, ReactNode, createContext, useCallback, useMemo, useState } from 'react';
+import { FC, ReactNode, createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
 import { notify } from "../utils/notifications";
 import { NetworkConfigurationProvider, useNetworkConfiguration } from './NetworkConfigurationProvider';
@@ -25,8 +25,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const { networkConfiguration } = useNetworkConfiguration();
     const network = networkConfiguration as WalletAdapterNetwork;
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-    const { setManifest } = useManifest();
-    const { publicKey, signTransaction, signAllTransactions } = useWallet()
 
     const wallets = useMemo(
         () => [
@@ -44,20 +42,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         },
         []
     );
-
-    useMemo(async () => {
-        if (!publicKey) return
-        const DexWallet: DexterityWallet = {
-            publicKey: publicKey!,
-            signTransaction,
-            signAllTransactions,
-        }
-        console.log({DexWallet})
-        const rpc = network == 'devnet'? process.env.NEXT_PUBLIC_DEVNET_RPC! : network == 'mainnet-beta'? process.env.NEXT_PUBLIC_MAINNET_RPC! : clusterApiUrl(network)
-        const manifest = await dexterity.getManifest(rpc, true, DexWallet);
-        console.log('Manifest: ', manifest)
-        setManifest(manifest);
-    }, [publicKey]);
 
     return (
         // TODO: updates needed for updating and referencing endpoint: wallet adapter rework

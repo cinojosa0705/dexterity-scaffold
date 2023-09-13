@@ -8,25 +8,37 @@ import { DefaultInfo } from "components/DefaultInfo";
 import { PlaceLimitOrder } from "components/LimitOrder";
 import { FundingTrader } from "components/FundingTrg";
 import { ProductPrices } from "components/ProductPrices";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { AccountInfo } from "components/AccountInfo";
 import { PlaceMarketOrder } from "components/MarketOrder";
 import { OpenOrders } from "components/OpenOrders";
+import { useNetworkConfiguration } from "contexts/NetworkConfigurationProvider";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 export const BasicsView: FC = ({ }) => {
   const { publicKey, signTransaction, signAllTransactions } = useWallet()
-  const { manifest } = useManifest()
+  const { manifest, setManifest } = useManifest()
   const { trader } = useTrader()
   const { selectedProduct, setIndexPrice, setMarkPrice } = useProduct()
+  const { networkConfiguration } = useNetworkConfiguration();
+  const network = networkConfiguration as WalletAdapterNetwork;
 
   useMemo(async () => {
+    if (!publicKey) return
     const DexWallet: DexterityWallet = {
-      publicKey,
+      publicKey: publicKey!,
       signTransaction,
       signAllTransactions,
     }
-    manifest?.setWallet(DexWallet)
-  }, [publicKey, manifest, trader]);
+    console.log({ DexWallet })
+    const rpc =
+      network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC! :
+        network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC! :
+          clusterApiUrl(network)
+    const manifest = await dexterity.getManifest(rpc, true, DexWallet);
+    console.log('Manifest: ', manifest)
+    setManifest(manifest);
+  }, [publicKey]);
 
   useEffect(() => { }, [trader, setIndexPrice, setMarkPrice])
 

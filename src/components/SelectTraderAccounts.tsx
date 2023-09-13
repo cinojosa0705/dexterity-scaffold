@@ -37,14 +37,14 @@ export const SelectTraderAccounts: FC = () => {
 
     useEffect(() => {
         fetchTraderAccounts();
-    }, [publicKey]);
+    }, [publicKey, manifest]);
 
     const fetchTraderAccounts = useCallback(async () => {
-        if (!publicKey) return;
-        if (!manifest) return;
-        if (!manifest.fields) return
-        if (!manifest.fields.wallet) return
-        if (!manifest.fields.wallet.publicKey) return;
+        if (!publicKey) {console.log('publicKey error');return};
+        if (!manifest) {console.log('manifest error');return};
+        if (!manifest.fields) {console.log('manifest.fields error');return};
+        if (!manifest.fields.wallet) {console.log('manifest.fields.wallet error');return};
+        if (!manifest.fields.wallet.publicKey) {console.log('manifest.fields.wallet.publicKey error');return};
 
         try {
             const trgs = await manifest.getTRGsOfOwner(publicKey, new PublicKey(mpgPubkey));
