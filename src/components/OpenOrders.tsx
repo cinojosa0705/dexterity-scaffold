@@ -1,7 +1,8 @@
 import { dexterity, useProduct, useTrader } from "contexts/DexterityProviders";
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import Button from "./Button";
 import { timeSince } from "utils/util";
+import { notify } from "utils/notifications";
 
 type BigNumber = {
     m: string;
@@ -22,14 +23,31 @@ export const OpenOrders: FC = () => {
     const {
         orderData, // ordeData: OrderData[]
         lastUpdated,
-        updated
+        updated,
+        trader
     } = useTrader()
+    const { selectedProduct } = useProduct()
+    const [requested, setRequested] = useState(false)
+
+    const cancelOrders = useCallback(async() => {
+        setRequested(true)
+        let ordersArr
+        try {
+            ordersArr = await trader.cancelAllOrders([selectedProduct.name])
+        } catch (error) {
+            notify({type: 'error', message: `Error canceling all orders, ${error}`})
+        } finally {
+            notify({type: 'success', message: `Canceled all orders, ${ordersArr}`})
+        }
+        setRequested(false)
+    }, [])
 
     return (
         <>
             {updated && orderData && (
                 <div className="border border-white rounded-lg p-4">
                     <h1 className="text-2xl mb-4">Account Info</h1>
+                    <Button text={!requested? `Cancel All Orders` : `Cancelling all orders...`} className="bg-red-500 text-white text-sm" onClick={cancelOrders} disabled={requested}></Button>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <h2 className="text-xl mb-2">Orders</h2>
