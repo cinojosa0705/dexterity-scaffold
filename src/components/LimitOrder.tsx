@@ -56,63 +56,68 @@ export const PlaceLimitOrder: FC = () => {
 
     return (
         <div className="flex flex-col justify-center items-center border border-white rounded-lg p-4 mt-4">
-          <h1 className='text-2xl mb-4'>Place a Limit Order</h1>
-          
-          <div className="w-full flex flex-col items-center">
-            <label htmlFor="priceInput" className="text-xl font-semibold mb-1">Price</label>
-            <input
-              id="priceInput"
-              type="number"
-              placeholder="Price"
-              onChange={(e) => setPrice(parseFloat(e.target.value))}
-              className="w-full mb-4 p-2 rounded-md text-xl text-black border border-gray-300"
-              aria-label="Enter the price for the order"
-            />
-          </div>
-          
-          <div className="w-full flex flex-col items-center">
-            <label htmlFor="sizeInput" className="text-xl font-semibold mb-1">Size</label>
-            <input
-              id="sizeInput"
-              type="number"
-              placeholder="Size"
-              onChange={(e) => setSize(parseFloat(e.target.value))}
-              className="w-full mb-4 p-2 rounded-md text-xl text-black border border-gray-300"
-              aria-label="Enter the size for the order"
-            />
-          </div>
-      
-          <div className="flex items-center space-x-4">
-            <label className="text-xl font-semibold" htmlFor="isLongCheckbox">
-              <input
-                id="isLongCheckbox"
-                type="checkbox"
-                checked={orderType === 'Long'}
-                onChange={() => setOrderType(orderType === 'Long' ? 'None' : 'Long')}
-              />
-              Long
-            </label>
+            <h1 className='text-2xl mb-4'>Place a Limit Order</h1>
+
+            <div className="w-full flex flex-col items-center">
+                <label htmlFor="priceInput" className="text-xl font-semibold mb-1">Price</label>
+                <input
+                    id="priceInput"
+                    type="number"
+                    placeholder="Price"
+                    onChange={(e) => setPrice(parseFloat(e.target.value))}
+                    className="w-full mb-4 p-2 rounded-md text-xl text-black border border-gray-300"
+                    aria-label="Enter the price for the order"
+                />
+            </div>
+
+            <div className="w-full flex flex-col items-center">
+                <label htmlFor="sizeInput" className="text-xl font-semibold mb-1">Size</label>
+                <input
+                    id="sizeInput"
+                    type="number"
+                    placeholder="Size"
+                    onChange={(e) => setSize(parseFloat(e.target.value))}
+                    className="w-full mb-4 p-2 rounded-md text-xl text-black border border-gray-300"
+                    aria-label="Enter the size for the order"
+                />
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <div className={`p-2 pr-8 pl-8 ${orderType === 'Long' ? 'bg-[#80ff7d]' : 'bg-gray-200'}`}>
+                    <label className="text-xl font-semibold text-white" htmlFor="isLongCheckbox">
+                        <input
+                            id="isLongCheckbox"
+                            type="checkbox"
+                            className="hidden"
+                            checked={orderType === 'Long'}
+                            onChange={() => setOrderType(orderType === 'Long' ? 'None' : 'Long')}
+                        />
+                        Long
+                    </label>
+                </div>
+                <div className={`p-2 pr-8 pl-8 ${orderType === 'Short' ? 'bg-[#ff80f2]' : 'bg-gray-200'}`}>
+                    <label className="text-xl font-semibold text-white" htmlFor="isShortCheckbox">
+                        <input
+                            id="isShortCheckbox"
+                            type="checkbox"
+                            className="hidden"
+                            checked={orderType === 'Short'}
+                            onChange={() => setOrderType(orderType === 'Short' ? 'None' : 'Short')}
+                        />
+                        Short
+                    </label>
+                </div>
+            </div>
             
-            <label className="text-xl font-semibold" htmlFor="isShortCheckbox">
-              <input
-                id="isShortCheckbox"
-                type="checkbox"
-                checked={orderType === 'Short'}
-                onChange={() => setOrderType(orderType === 'Short' ? 'None' : 'Short')}
-              />
-              Short
-            </label>
-          </div>
-      
-          <Button 
-            text="🛒 Place Limit Order"
-            onClick={handlePlaceOrder} 
-            disabled={!isFormValid || isLoading}
-            className={isFormValid ? 'mt-4 bg-gradient-to-br from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : ''}
-            isLoading={isLoading}
-            status={isSuccess ? 'success' : 'failed'}
-          />
+            <Button
+                text="🛒 Place Limit Order"
+                onClick={handlePlaceOrder}
+                disabled={!isFormValid || isLoading}
+                className={isFormValid ? 'mt-4 bg-gradient-to-br from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : ''}
+                isLoading={isLoading}
+                status={isSuccess ? 'success' : 'failed'}
+            />
         </div>
-      );
-      
+    );
+
 };

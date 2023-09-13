@@ -24,7 +24,9 @@ export const AccountInfo: FC = () => {
         updated,
         setUpdated,
         lastUpdated,
-        setLastUpdated
+        setLastUpdated,
+        setAccountLeverage,
+        accountLeverage
     } = useTrader()
 
     const updateAccountInfo = useCallback(async () => {
@@ -52,6 +54,7 @@ export const AccountInfo: FC = () => {
         setAllTimePnl(allTimePnl)
         setUpdated(true)
         setLastUpdated(Date.now())
+        setAccountLeverage(portfolioValue / initialMarginReq)
     }, [trader, selectedProduct]); // Removed markPrice and indexPrice
 
     useEffect(() => {
@@ -85,6 +88,9 @@ export const AccountInfo: FC = () => {
 
                         <div className="font-semibold">Account Health:</div>
                         <div>{accountHealth}</div>
+
+                        <div className="font-semibold">Account Leverage:</div>
+                        <div>{accountLeverage}</div>
 
                         <div className="font-semibold">All Time PnL:</div>
                         <div>${allTimePnl.toLocaleString()}</div>

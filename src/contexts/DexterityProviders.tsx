@@ -47,6 +47,8 @@ interface TraderContextProps {
   setInitialMarginReq: React.Dispatch<React.SetStateAction<number>>;
   maintananceMarginReq: number;
   setMaintananceMarginReq: React.Dispatch<React.SetStateAction<number>>;
+  accountLeverage: number;
+  setAccountLeverage: React.Dispatch<React.SetStateAction<number>>;
   accountHealth: string;
   setAccountHealth: React.Dispatch<React.SetStateAction<string>>;
   allTimePnl: number;
@@ -67,7 +69,8 @@ export const TraderProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [portfolioValue, setPortfolioValue] = useState(null);  
   const [initialMarginReq, setInitialMarginReq] = useState(null); 
   const [maintananceMarginReq, setMaintananceMarginReq] = useState(null); 
-  const [accountHealth, setAccountHealth] = useState(null); 
+  const [accountHealth, setAccountHealth] = useState(null);
+  const [accountLeverage, setAccountLeverage] = useState(null);  
   const [allTimePnl, setAllTimePnl] = useState(null); 
   const [updated, setUpdated] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -89,6 +92,8 @@ export const TraderProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setMaintananceMarginReq,
         accountHealth,
         setAccountHealth,
+        accountLeverage,
+        setAccountLeverage,
         allTimePnl,
         setAllTimePnl,
         updated,

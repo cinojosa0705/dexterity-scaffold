@@ -82,7 +82,7 @@ export const FundingTrader: FC = () => {
             
             <button
               onClick={handleWithdraw}
-              className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-[#ff80f2] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+              className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br from-[#ff80f2] to-[#ff80f2] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
               disabled={amount === null || isLoading}
             >
               {isLoading && withdrawStatus === 'processing' ? 'Processing...' : withdrawStatus === 'success' ? 'Success!' : withdrawStatus === 'failed' ? 'Failed!' : '💸 Withdraw'}
