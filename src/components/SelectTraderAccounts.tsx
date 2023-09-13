@@ -3,7 +3,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
 import { PublicKey } from '@solana/web3.js';
 import { notify } from "../utils/notifications";
-import { formatPubKey } from 'utils/util';
+import { formatPubKey, handleCopy } from 'utils/util';
 import Button from './Button';
 
 type TraderAccount = {
@@ -81,7 +81,8 @@ export const SelectTraderAccounts: FC = () => {
     
             {trgsArr.length > 0 ? (
                 <div className="w-full flex flex-col items-center space-y-4">
-                    <TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />
+                    <div><TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />
+                    <span className='ml-5 cursor-pointer' onClick={() => {handleCopy(selectedTrg, 'Trg Pubkey')}}>📋</span></div>
                     <Button
                         text="🔄 Load Trader Accounts"
                         onClick={fetchTraderAccounts}

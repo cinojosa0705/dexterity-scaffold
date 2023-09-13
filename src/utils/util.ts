@@ -38,3 +38,14 @@ export function timeSince(timestamp: number): string {
 
     return Math.floor(elapsed / 1000) + " seconds ago"; // Seconds
 }
+
+import { ClipboardCopyIcon } from '@heroicons/react/solid'; // You can use any icon library
+import { notify } from './notifications';
+
+export const handleCopy = (textToCopy: string, item: string) => {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        notify({ type: 'success', message: `Copied ${item} to clipbpard!` })
+    }).catch(() => {
+        notify({ type: 'error', message: `Could not copy ${item} to clipbpard` })
+    });
+}
