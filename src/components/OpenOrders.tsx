@@ -31,13 +31,13 @@ export const OpenOrders: FC = () => {
 
     const cancelOrders = useCallback(async() => {
         setRequested(true)
-        let ordersArr
+        let ordersArr: any[]
         try {
             ordersArr = await trader.cancelAllOrders([selectedProduct.name])
         } catch (error) {
             notify({type: 'error', message: `Error canceling all orders, ${error}`})
         } finally {
-            notify({type: 'success', message: `Canceled all orders, ${ordersArr}`})
+            notify({type: 'success', message: `Canceled all orders`, txid: ordersArr[0] })
         }
         setRequested(false)
     }, [])

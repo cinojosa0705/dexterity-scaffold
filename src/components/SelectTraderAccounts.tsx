@@ -76,19 +76,36 @@ export const SelectTraderAccounts: FC = () => {
     }, [manifest, setTrader]);
 
     return (
-        <div className="flex flex-column justify-center items-center">
-          <h1 className='text-2xl mr-3'>Selecting or Creating a Trader Account</h1>
-          {trgsArr.length > 0 ? (
-            <>
-              <TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />
-              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
-            </>
-          ) : (
-            <>
-              <Button text="🔄 Load Trader Accounts" onClick={fetchTraderAccounts} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
-              <Button text="➕ Create New Trader Account" onClick={handleCreateTRG} disabled={!publicKey} className='bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' />
-            </>
-          )}
+        <div className="flex flex-col items-center justify-center border border-white rounded-lg p-4 mt-4">
+            <h1 className="text-2xl mb-4">Select or Create a Trader Account</h1>
+    
+            {trgsArr.length > 0 ? (
+                <div className="w-full flex flex-col items-center space-y-4">
+                    <TraderAccountDropdown accounts={trgsArr} onSelect={handleSelection} />
+                    <Button
+                        text="🔄 Load Trader Accounts"
+                        onClick={fetchTraderAccounts}
+                        disabled={!publicKey}
+                        className={`w-full text-md rounded-md ${publicKey ? 'bg-gradient-to-br from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+                    />
+                </div>
+            ) : (
+                <div className="w-full flex flex-col items-center space-y-4">
+                    <Button
+                        text="🔄 Load Trader Accounts"
+                        onClick={fetchTraderAccounts}
+                        disabled={!publicKey}
+                        className={`w-full text-md rounded-md ${publicKey ? 'bg-gradient-to-br from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+                    />
+                    <Button
+                        text="➕ Create New Trader Account"
+                        onClick={handleCreateTRG}
+                        disabled={!publicKey}
+                        className={`w-full text-md rounded-md ${publicKey ? 'bg-gradient-to-br from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}
+                    />
+                </div>
+            )}
         </div>
-      );
+    );
+    
 };
