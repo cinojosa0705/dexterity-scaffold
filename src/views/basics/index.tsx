@@ -11,6 +11,7 @@ import { ProductPrices } from "components/ProductPrices";
 import { PublicKey } from "@solana/web3.js";
 import { AccountInfo } from "components/AccountInfo";
 import { PlaceMarketOrder } from "components/MarketOrder";
+import { OpenOrders } from "components/OpenOrders";
 
 export const BasicsView: FC = ({ }) => {
   const { publicKey, signTransaction, signAllTransactions } = useWallet()
@@ -50,6 +51,7 @@ export const BasicsView: FC = ({ }) => {
                     <PlaceMarketOrder />
                   </div>
                 </div>
+                <div className="mt-4"><OpenOrders /></div>
               </div>
               <div className="col-span-1 md:col-span-1 lg:col-span-1 gap-4">
                 <FundingTrader />

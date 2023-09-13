@@ -29,10 +29,20 @@ export const useManifest = () => {
   return context;
 };
 
-interface numberType {
-  number: number;
-  setNumber: React.Dispatch<React.SetStateAction<number>>;
-}
+type BigNumber = {
+  m: string;
+  exp: string;
+  _isNan: boolean;
+};
+
+type OrderData = {
+  id: string;
+  productName: string;
+  productIndex: number;
+  price: BigNumber;
+  qty: BigNumber;
+  isBid: boolean;
+};
 
 interface TraderContextProps {
   trader: InstanceType<typeof dexterity.Trader>;
@@ -57,6 +67,8 @@ interface TraderContextProps {
   setUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   lastUpdated: number;
   setLastUpdated: React.Dispatch<React.SetStateAction<number>>;
+  orderData: OrderData[];
+  setOrderData: React.Dispatch<React.SetStateAction<OrderData[]>>;
 }
 
 const TraderContext = createContext<TraderContextProps | undefined>(undefined);
@@ -74,6 +86,7 @@ export const TraderProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [allTimePnl, setAllTimePnl] = useState(null); 
   const [updated, setUpdated] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [orderData, setOrderData] = useState(null);
 
   return (
     <TraderContext.Provider value={
@@ -99,7 +112,9 @@ export const TraderProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         updated,
         setUpdated,
         lastUpdated,
-        setLastUpdated
+        setLastUpdated,
+        orderData,
+        setOrderData
       }
     }>
       {children}

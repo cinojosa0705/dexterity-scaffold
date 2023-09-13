@@ -2,6 +2,7 @@ import { PublicKey } from "@solana/web3.js";
 import { dexterity, useProduct, useTrader } from "contexts/DexterityProviders";
 import { FC, useCallback, useEffect } from "react";
 import Button from "./Button";
+import { timeSince } from "utils/util";
 
 export const AccountInfo: FC = () => {
     const { selectedProduct } = useProduct()
@@ -26,7 +27,8 @@ export const AccountInfo: FC = () => {
         lastUpdated,
         setLastUpdated,
         setAccountLeverage,
-        accountLeverage
+        accountLeverage,
+        setOrderData
     } = useTrader()
 
     const updateAccountInfo = useCallback(async () => {
@@ -53,8 +55,9 @@ export const AccountInfo: FC = () => {
         setAccountHealth(accountHealth)
         setAllTimePnl(allTimePnl)
         setUpdated(true)
-        setLastUpdated(Date.now())
+        setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name]))))
         setAccountLeverage(portfolioValue / initialMarginReq)
+        setLastUpdated(Date.now())
     }, [trader, selectedProduct]); // Removed markPrice and indexPrice
 
     useEffect(() => {
@@ -109,42 +112,6 @@ export const AccountInfo: FC = () => {
 
 
     );
-}
-
-function timeSince(timestamp: number): string {
-    const now = Date.now(); // Current time in Unix timestamp (milliseconds)
-    let elapsed = now - timestamp; // Time elapsed in milliseconds
-
-    if (elapsed < 0) {
-        return `in the future (${new Date(timestamp).toISOString()})`;
-    }
-
-    let interval = Math.floor(elapsed / 31536000000); // Years
-    if (interval >= 1) {
-        return interval + (interval === 1 ? " year ago" : " years ago");
-    }
-
-    interval = Math.floor(elapsed / 2592000000); // Months
-    if (interval >= 1) {
-        return interval + (interval === 1 ? " month ago" : " months ago");
-    }
-
-    interval = Math.floor(elapsed / 86400000); // Days
-    if (interval >= 1) {
-        return interval + (interval === 1 ? " day ago" : " days ago");
-    }
-
-    interval = Math.floor(elapsed / 3600000); // Hours
-    if (interval >= 1) {
-        return interval + (interval === 1 ? " hour ago" : " hours ago");
-    }
-
-    interval = Math.floor(elapsed / 60000); // Minutes
-    if (interval >= 1) {
-        return interval + (interval === 1 ? " minute ago" : " minutes ago");
-    }
-
-    return Math.floor(elapsed / 1000) + " seconds ago"; // Seconds
 }
 
 
