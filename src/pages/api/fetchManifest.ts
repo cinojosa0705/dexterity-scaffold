@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { clusterApiUrl } from '@solana/web3.js';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { clusterApiUrl, Cluster } from '@solana/web3.js';
 
 type ResponseData = {
   data: any;
@@ -12,10 +12,16 @@ export default async function handler(
 ) {
   try {
     const { network, publicKey } = req.query;
-    const apiURL = 
-      network === 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC :
-      network === 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC :
-      clusterApiUrl(network as string);
+    
+    const clusterMapping: { [key: string]: Cluster } = {
+        'devnet': 'devnet',
+        'mainnet-beta': 'mainnet-beta',
+      };
+      
+      const apiURL = 
+        network === 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC :
+        network === 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC :
+        clusterApiUrl(clusterMapping[network as string]);
 
     const response = await fetch(`${apiURL}?publicKey=${publicKey}`, {
       headers: {
