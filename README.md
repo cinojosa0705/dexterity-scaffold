@@ -13,6 +13,17 @@ npm install
 yarn install
 ```
 
+## Setting Up Environment Variables
+
+Before you build and run the project, you need to set up environment variables for the RPC URLs. Create a `.env.local` file in the root directory of your project and add the following lines:
+
+```bash
+NEXT_PUBLIC_DEVNET_RPC=https://devnet.helius-rpc.com/?api-key=YOUR_DEVNET_API_KEY
+NEXT_PUBLIC_MAINNET_RPC=https://rpc.helius.xyz/?api-key=YOUR_MAINNET_API_KEY
+```
+
+To prevent API keys from being exposed on the client-side, we utilize serverless functions in Next.js. These functions, housed in the `pages/api` directory, handle API calls server-side, ensuring the API keys, stored in environment variables, are never revealed to the client.
+
 ## Build and Run
 
 Next, run the development server:
