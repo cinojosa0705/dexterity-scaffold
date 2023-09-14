@@ -28,7 +28,8 @@ export const AccountInfo: FC = () => {
         setLastUpdated,
         setAccountLeverage,
         accountLeverage,
-        setOrderData
+        setOrderData,
+        setPositionsData
     } = useTrader()
 
     const updateAccountInfo = useCallback(async () => {
@@ -46,7 +47,10 @@ export const AccountInfo: FC = () => {
                             portfolioValue > maintananceMarginReq ? 'Very unhealthy, reduce your risk' :
                                 'Liquidatable'
         const allTimePnl = Number(trader.getPnL())
+        const positions = Array.from(trader.getPositions())
 
+        setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name]))))
+        setPositionsData(positions)
         setCashBalance(cashBalance)
         setOpenPositionsValue(openPositionsValue)
         setPortfolioValue(portfolioValue)
@@ -55,7 +59,6 @@ export const AccountInfo: FC = () => {
         setAccountHealth(accountHealth)
         setAllTimePnl(allTimePnl)
         setUpdated(true)
-        setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name]))))
         setAccountLeverage(portfolioValue / initialMarginReq)
         setLastUpdated(Date.now())
     }, [trader, selectedProduct]); // Removed markPrice and indexPrice
@@ -92,8 +95,8 @@ export const AccountInfo: FC = () => {
                         <div className="font-semibold">Account Health:</div>
                         <div>{accountHealth}</div>
 
-                        <div className="font-semibold">Account Leverage:</div>
-                        <div>{accountLeverage}</div>
+                        <div className="font-semibold">Account Effective Leverage:</div>
+                        <div>x{accountLeverage.toLocaleString()}</div>
 
                         <div className="font-semibold">All Time PnL:</div>
                         <div>${allTimePnl.toLocaleString()}</div>

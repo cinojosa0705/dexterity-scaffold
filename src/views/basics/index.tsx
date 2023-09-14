@@ -14,6 +14,7 @@ import { PlaceMarketOrder } from "components/MarketOrder";
 import { OpenOrders } from "components/OpenOrders";
 import { useNetworkConfiguration } from "contexts/NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { OpenPositions } from "components/OpenPositions";
 
 export const BasicsView: FC = ({ }) => {
   const { publicKey, signTransaction, signAllTransactions } = useWallet()
@@ -68,6 +69,7 @@ export const BasicsView: FC = ({ }) => {
               <div className="col-span-1 md:col-span-1 lg:col-span-1 gap-4">
                 <FundingTrader />
                 <div className="mt-4"><AccountInfo /></div>
+                <div className="mt-4"><OpenPositions/></div>
               </div>
             </div>
           }

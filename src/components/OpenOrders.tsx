@@ -46,11 +46,10 @@ export const OpenOrders: FC = () => {
         <>
             {updated && orderData && (
                 <div className="border border-white rounded-lg p-4">
-                    <h1 className="text-2xl mb-4">Account Info</h1>
+                    <h1 className="text-2xl mb-4">Orders Info</h1>
                     <Button text={!requested? `Cancel All Orders` : `Cancelling all orders...`} className="bg-red-500 text-white text-sm" onClick={cancelOrders} disabled={requested}></Button>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2">
-                            <h2 className="text-xl mb-2">Orders</h2>
                             <table className="w-full text-left border-collapse">
                                 <thead>
                                     <tr>
