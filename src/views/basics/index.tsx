@@ -8,7 +8,6 @@ import { DefaultInfo } from "components/DefaultInfo";
 import { PlaceLimitOrder } from "components/LimitOrder";
 import { FundingTrader } from "components/FundingTrg";
 import { ProductPrices } from "components/ProductPrices";
-import { PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { AccountInfo } from "components/AccountInfo";
 import { PlaceMarketOrder } from "components/MarketOrder";
 import { OpenOrders } from "components/OpenOrders";
@@ -31,11 +30,7 @@ export const BasicsView: FC = ({ }) => {
       signAllTransactions,
     }
     console.log({ DexWallet })
-    const rpc =
-      network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC! :
-        network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC! :
-          clusterApiUrl(network)
-    const manifest = await dexterity.getManifest(rpc, true, DexWallet);
+    const manifest = await dexterity.getManifest(`/api/fetchManifest?network=${network}&publicKey=${publicKey}`, true, DexWallet);
     console.log('Manifest: ', manifest)
     setManifest(manifest);
   }, [publicKey]);
