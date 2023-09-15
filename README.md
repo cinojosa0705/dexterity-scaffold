@@ -5,7 +5,6 @@ The Hxro Dexterity dApp Scaffold repos are meant to house good starting scaffold
 
 ## Project Roadmap
 
-```markdown
 - [x] **Product Information**
   - [x] Mark-price
   - [x] Index-price
@@ -42,7 +41,6 @@ The Hxro Dexterity dApp Scaffold repos are meant to house good starting scaffold
   - [ ] One-click-order
     - [ ] Limit/Marker Toggle
     - [ ] Default amount/size
-```
 
 ## Getting Started
 
