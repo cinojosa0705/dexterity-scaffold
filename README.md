@@ -4,42 +4,45 @@
 The Hxro Dexterity dApp Scaffold repos are meant to house good starting scaffolds for ecosystem developers to get up and running quickly with a front-end client UI that integrates several common features found in dApps with some basic usage examples. Wallet Integration. State management. Components examples. Notifications. Setup recommendations.
 
 ## Project Roadmap
-[x] Product Information
-|__[x] Mark-price
-|__[x] Index-price
-[x] Market Orders
-|__[x] Slippage handler
-[x] View account info
-|__[x] Cash balance
-|__[x] Initial Margin Requirement
-|__[x] Maintance Margin Requirement
-|__[x] Account Health
-|__[x] Account Open Interest (Open Positions Value)
-|__[x] Account All-time PnL
-[ ] Open Positions
-|__[x] Size
-|__[x] Net Side
-|__[x] Mark-price value
-|__[x] One-click market close (one or all)
-|__[ ] Avg cost (gonna be a bit hard)
-|__[ ] PnL
-[x] Open Orders
-|__[x] Size
-|__[x] Level
-|__[x] Net side
-|__[x] At-level value
-|__[x] One-click cancel all
-[ ] Products
-|__[x] Select which product from the MPG to trade on / get feed from
-|__[ ] Effective-current product leverage
-|__[ ] Open Interest
-|__[ ] Funding rate
-[ ] Orderbook
-|__[x] Component
-|__[x] Connection to live orderbook
-|__[ ] One-click-order
-|__|__[ ] Limit/Marker Toggle
-|__|__[ ] Default amount/size
+
+```markdown
+- [x] **Product Information**
+  - [x] Mark-price
+  - [x] Index-price
+- [x] **Market Orders**
+  - [x] Slippage handler
+- [x] **View account info**
+  - [x] Cash balance
+  - [x] Initial Margin Requirement
+  - [x] Maintenance Margin Requirement
+  - [x] Account Health
+  - [x] Account Open Interest (Open Positions Value)
+  - [x] Account All-time PnL
+- [ ] **Open Positions**
+  - [x] Size
+  - [x] Net Side
+  - [x] Mark-price value
+  - [x] One-click market close (one or all)
+  - [ ] Avg cost (gonna be a bit hard)
+  - [ ] PnL
+- [x] **Open Orders**
+  - [x] Size
+  - [x] Level
+  - [x] Net side
+  - [x] At-level value
+  - [x] One-click cancel all
+- [ ] **Products**
+  - [x] Select which product from the MPG to trade on / get feed from
+  - [ ] Effective-current product leverage
+  - [ ] Open Interest
+  - [ ] Funding rate
+- [ ] **Orderbook**
+  - [x] Component
+  - [x] Connection to live orderbook
+  - [ ] One-click-order
+    - [ ] Limit/Marker Toggle
+    - [ ] Default amount/size
+```
 
 ## Getting Started
 
