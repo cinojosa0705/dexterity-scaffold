@@ -15,6 +15,16 @@ yarn install
 
 ## Build and Run
 
+Create a .env and input the corresponding values:
+
+```sh
+NEXT_PUBLIC_MAINNET_RPC=
+NEXT_PUBLIC_DEVNET_RPC=
+NEXT_PUBLIC_REFERRER_TRG_DEVNET=
+NEXT_PUBLIC_REFERRER_TRG_MAINNET=
+NEXT_PUBLIC_REFERRER_BPS=
+```
+
 Next, run the development server:
 
 ```bash
