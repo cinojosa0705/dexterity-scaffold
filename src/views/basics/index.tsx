@@ -15,7 +15,6 @@ import { OpenOrders } from "components/OpenOrders";
 import { useNetworkConfiguration } from "contexts/NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { OpenPositions } from "components/OpenPositions";
-import CandlestickChart from "components/PriceChart";
 
 export const BasicsView: FC = ({ }) => {
   const { publicKey, signTransaction, signAllTransactions } = useWallet()
@@ -53,7 +52,6 @@ export const BasicsView: FC = ({ }) => {
         <div className="text-center">
           <DefaultInfo />
           <SelectTraderAccounts />
-          <CandlestickChart />
           {trader &&
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
               <div className="col-span-1 md:col-span-1 lg:col-span-1">
