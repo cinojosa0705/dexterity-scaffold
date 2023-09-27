@@ -1,8 +1,5 @@
 import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider, useWallet } from '@solana/wallet-adapter-react';
-import {
-    UnsafeBurnerWalletAdapter
-} from '@solana/wallet-adapter-wallets';
 import { Cluster, clusterApiUrl } from '@solana/web3.js';
 import { FC, ReactNode, createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
@@ -12,7 +9,7 @@ import dynamic from "next/dynamic";
 import dexterityTs, { DexterityWallet } from '@hxronetwork/dexterity-ts';
 import { ManifestProvider, useManifest, TraderProvider, ProductProvider } from './DexterityProviders';
 export const dexterity = dexterityTs
-import { SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
+import { SolflareWalletAdapter, ParticleAdapter } from '@solana/wallet-adapter-wallets'
 
 const ReactUIWalletModalProviderDynamic = dynamic(
     async () =>
@@ -29,7 +26,7 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const wallets = useMemo(
         () => [
             new SolflareWalletAdapter(),
-            new UnsafeBurnerWalletAdapter(),
+            new ParticleAdapter()
         ],
         [network]
     );
