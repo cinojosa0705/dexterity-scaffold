@@ -42,7 +42,7 @@ export const PlaceMarketOrder: FC = () => {
                 sizeFraction,
                 false,
                 new PublicKey(referralTrg),
-                Number(process.env.NEXT_PUBLIC_REFERRER_BPS!),
+                35,
                 null,
                 null,
                 callbacks
