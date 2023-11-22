@@ -33,6 +33,7 @@ export const PlaceLimitOrder: FC = () => {
         const priceFraction = dexterity.Fractional.New(price, 0);
         const sizeFraction = dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent);
         const referralTrg = network === 'devnet' ? process.env.NEXT_PUBLIC_REFERRER_TRG_DEVNET! : process.env.NEXT_PUBLIC_REFERRER_TRG_MAINNET!
+        const referralFee = process.env.NEXT_PUBLIC_REFERRER_BPS
 
         try {
             setIsLoading(true);
@@ -43,7 +44,7 @@ export const PlaceLimitOrder: FC = () => {
                 sizeFraction,
                 false,
                 referralTrg ? new PublicKey(referralTrg) : null,
-                Number(process.env.NEXT_PUBLIC_REFERRER_BPS!),
+                referralFee ? Number(referralFee) : null,
                 null,
                 null,
                 callbacks
