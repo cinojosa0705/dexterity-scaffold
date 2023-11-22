@@ -1,23 +1,8 @@
-import { dexterity, useProduct, useTrader } from "contexts/DexterityProviders";
+import { useProduct, useTrader } from "contexts/DexterityProviders";
 import { FC, useCallback, useEffect, useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 import { timeSince } from "utils/util";
 import { notify } from "utils/notifications";
-
-type BigNumber = {
-    m: string;
-    exp: string;
-    _isNan: boolean;
-};
-
-type OrderData = {
-    id: string;
-    productName: string;
-    productIndex: number;
-    price: BigNumber;
-    qty: BigNumber;
-    isBid: boolean;
-};
 
 export const OpenOrders: FC = () => {
     const {

@@ -1,14 +1,7 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
-import dexterityTs from '@hxronetwork/dexterity-ts'
 import { useNetworkConfiguration } from "./NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { env } from "node:process";
-export const dexterity = dexterityTs
-
-interface ManifestContextProps {
-  manifest: InstanceType<typeof dexterity.Manifest>;
-  setManifest: React.Dispatch<React.SetStateAction<InstanceType<typeof dexterity.Manifest>>>;
-}
+import { ManifestContextProps, OrderData, Product, ProductContextProps, TraderContextProps } from "utils/dexterityTypes";
 
 const ManifestContext = createContext<ManifestContextProps | undefined>(undefined);
 
@@ -29,50 +22,6 @@ export const useManifest = () => {
   }
   return context;
 };
-
-type BigNumber = {
-  m: string;
-  exp: string;
-  _isNan: boolean;
-};
-
-type OrderData = {
-  id: string;
-  productName: string;
-  productIndex: number;
-  price: BigNumber;
-  qty: BigNumber;
-  isBid: boolean;
-};
-
-interface TraderContextProps {
-  trader: InstanceType<typeof dexterity.Trader>;
-  setTrader: React.Dispatch<React.SetStateAction<InstanceType<typeof dexterity.Trader>>>;
-  cashBalance: number;
-  setCashBalance: React.Dispatch<React.SetStateAction<number>>;
-  openPositionsValue: number;
-  setOpenPositionsValue: React.Dispatch<React.SetStateAction<number>>;
-  portfolioValue: number;
-  setPortfolioValue: React.Dispatch<React.SetStateAction<number>>;
-  initialMarginReq: number;
-  setInitialMarginReq: React.Dispatch<React.SetStateAction<number>>;
-  maintananceMarginReq: number;
-  setMaintananceMarginReq: React.Dispatch<React.SetStateAction<number>>;
-  accountLeverage: number;
-  setAccountLeverage: React.Dispatch<React.SetStateAction<number>>;
-  accountHealth: string;
-  setAccountHealth: React.Dispatch<React.SetStateAction<string>>;
-  allTimePnl: number;
-  setAllTimePnl: React.Dispatch<React.SetStateAction<number>>;
-  updated: boolean;
-  setUpdated: React.Dispatch<React.SetStateAction<boolean>>;
-  lastUpdated: number;
-  setLastUpdated: React.Dispatch<React.SetStateAction<number>>;
-  orderData: OrderData[];
-  setOrderData: React.Dispatch<React.SetStateAction<OrderData[]>>;
-  positionsData: any[];
-  setPositionsData: React.Dispatch<React.SetStateAction<any[]>>;
-}
 
 const TraderContext = createContext<TraderContextProps | undefined>(undefined);
 
@@ -136,24 +85,6 @@ export const useTrader = () => {
   return context;
 };
 
-export interface Product {
-  index: number;
-  name: string;
-  minSize: number;
-  exponent: number
-}
-
-interface ProductContextProps {
-  mpgPubkey: string;
-  setMpgPubkey: React.Dispatch<React.SetStateAction<string>>;
-  selectedProduct: Product;
-  setSelectedProductIndex: React.Dispatch<React.SetStateAction<Product>>;
-  indexPrice: number;
-  setIndexPrice: React.Dispatch<React.SetStateAction<number>>;
-  markPrice: number;
-  setMarkPrice: React.Dispatch<React.SetStateAction<number>>;
-}
-
 const ProductContext = createContext<ProductContextProps | undefined>(undefined);
 
 export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -161,7 +92,6 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
   const { networkConfiguration } = useNetworkConfiguration();
   const network = networkConfiguration as WalletAdapterNetwork;
 
-  // if (devnet) BITCCOIN MPG; else if (mainnet) MAJORS MPG
   let defaultMpg =
     network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_MPG :
       network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_MPG : null;

@@ -1,26 +1,24 @@
 
 import { FC, useEffect, useMemo } from "react";
-import { SelectTraderAccounts } from '../../components/SelectTraderAccounts';
+import { SelectTraderAccounts } from '../../components/dexterity/SelectTraderAccounts';
 import { DexterityWallet } from "@hxronetwork/dexterity-ts";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { dexterity, useManifest, useProduct, useTrader } from "contexts/DexterityProviders";
+import { useManifest, useProduct, useTrader } from "contexts/DexterityProviders";
 import { DefaultInfo } from "components/DefaultInfo";
-import { PlaceLimitOrder } from "components/LimitOrder";
-import { FundingTrader } from "components/FundingTrg";
-import { ProductPrices } from "components/ProductPrices";
-import { PublicKey, clusterApiUrl } from "@solana/web3.js";
+import { PlaceLimitOrder } from "components/dexterity/LimitOrder";
+import { FundingTrader } from "components/dexterity/FundingTrg";
+import { clusterApiUrl } from "@solana/web3.js";
 import { AccountInfo } from "components/AccountInfo";
-import { PlaceMarketOrder } from "components/MarketOrder";
-import { OpenOrders } from "components/OpenOrders";
+import { OpenOrders } from "components/dexterity/OpenOrders";
 import { useNetworkConfiguration } from "contexts/NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { OpenPositions } from "components/OpenPositions";
+import { dexterity } from "utils/dexterityTypes";
 
 export const BasicsView: FC = ({ }) => {
   const { publicKey, signTransaction, signAllTransactions } = useWallet()
-  const { manifest, setManifest } = useManifest()
+  const { setManifest } = useManifest()
   const { trader } = useTrader()
-  const { selectedProduct, setIndexPrice, setMarkPrice } = useProduct()
+  const { setIndexPrice, setMarkPrice } = useProduct()
   const { networkConfiguration } = useNetworkConfiguration();
   const network = networkConfiguration as WalletAdapterNetwork;
 
@@ -31,7 +29,6 @@ export const BasicsView: FC = ({ }) => {
       signTransaction,
       signAllTransactions,
     }
-    console.log({ DexWallet })
     const rpc =
       network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC! :
         network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC! :
@@ -39,7 +36,7 @@ export const BasicsView: FC = ({ }) => {
     const manifest = await dexterity.getManifest(rpc, true, DexWallet);
     console.log('Manifest: ', manifest)
     setManifest(manifest);
-  }, [publicKey]);
+  }, [publicKey, network]);
 
   useEffect(() => { }, [trader, setIndexPrice, setMarkPrice])
 
@@ -55,21 +52,18 @@ export const BasicsView: FC = ({ }) => {
           {trader &&
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
               <div className="col-span-1 md:col-span-1 lg:col-span-1">
-                <ProductPrices />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <PlaceLimitOrder />
                   </div>
                   <div>
-                    <PlaceMarketOrder />
+                  <FundingTrader />
                   </div>
                 </div>
                 <div className="mt-4"><OpenOrders /></div>
               </div>
               <div className="col-span-1 md:col-span-1 lg:col-span-1 gap-4">
-                <FundingTrader />
                 <div className="mt-4"><AccountInfo /></div>
-                <div className="mt-4"><OpenPositions/></div>
               </div>
             </div>
           }

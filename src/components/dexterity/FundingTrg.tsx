@@ -1,8 +1,9 @@
 import React, { FC, useState, useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
-import { notify } from '../utils/notifications';
+import { useManifest, useTrader, useProduct } from 'contexts/DexterityProviders';
+import { notify } from '../../utils/notifications';
 import { PublicKey } from '@solana/web3.js';
+import { dexterity } from 'utils/dexterityTypes';
 
 export const FundingTrader: FC = () => {
     const { publicKey } = useWallet();
@@ -20,6 +21,7 @@ export const FundingTrader: FC = () => {
         onConfirm: async(txn: string) => {
             notify({ type: 'success', message: 'Deposited successfully into trader account!', txid: txn });
             setDepositStatus('success');
+            setInterval(() => setDepositStatus('idle'), 5_000)
             console.log('HERE CONFIRMED')
         }
     };
@@ -46,6 +48,7 @@ export const FundingTrader: FC = () => {
             setWithdrawStatus('processing');
             await trader.withdraw(dexterity.Fractional.New(amount, 0));
             setWithdrawStatus('success');
+            setInterval(() => setWithdrawStatus('idle'), 5_000)
         } catch (error: any) {
             setWithdrawStatus('failed');
             notify({ type: 'error', message: 'Withdrawal failed!', description: error?.message });
@@ -58,8 +61,8 @@ export const FundingTrader: FC = () => {
     return (
         <div className="flex flex-col justify-center items-center border border-white rounded-lg p-4 mt-4">
           <h1 className='text-2xl mb-4'>Funding Trader Account</h1>
-          
-          <div className="w-full flex flex-col items-center mb-4">
+        
+          <div className="w-full flex flex-col items-center mt-20 mb-6">
             <label htmlFor="amountInput" className="text-xl font-semibold mb-1">Amount</label>
             <input
               id="amountInput"
@@ -71,7 +74,7 @@ export const FundingTrader: FC = () => {
             />
           </div>
       
-          <div className="flex justify-center space-x-4 w-full">
+          <div className="flex justify-center space-x-4 w-full mt-12">
             <button
               onClick={handleDeposit}
               className={`group text-md w-30 m-2 btn ${amount !== null ? 'bg-gradient-to-br  from-[#80ff7d] to-[#80ff7d] hover:from-white hover:to-purple-300 text-black' : 'bg-gray-300 cursor-not-allowed'}`}

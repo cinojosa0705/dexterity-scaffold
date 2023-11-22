@@ -1,11 +1,12 @@
 import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
-import { notify } from '../utils/notifications';
+import { useManifest, useTrader, useProduct } from 'contexts/DexterityProviders';
+import { notify } from '../../utils/notifications';
 import { PublicKey } from '@solana/web3.js';
-import Button from './Button';
+import Button from '../Button';
 import { useNetworkConfiguration } from 'contexts/NetworkConfigurationProvider';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { dexterity } from 'utils/dexterityTypes';
 
 export const PlaceLimitOrder: FC = () => {
     const { publicKey } = useWallet();

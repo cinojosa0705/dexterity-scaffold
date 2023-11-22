@@ -1,20 +1,11 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useManifest, useTrader, dexterity, useProduct } from 'contexts/DexterityProviders';
+import { useManifest, useTrader, useProduct } from 'contexts/DexterityProviders';
 import { PublicKey } from '@solana/web3.js';
-import { notify } from "../utils/notifications";
+import { notify } from "../../utils/notifications";
 import { formatPubKey, handleCopy } from 'utils/util';
-import Button from './Button';
-
-type TraderAccount = {
-    pubkey: PublicKey;
-    trg: any
-};
-
-interface TraderAccountDropdownProps {
-    accounts: TraderAccount[];
-    onSelect: (value: string) => void;
-}
+import Button from '../Button';
+import { dexterity, TraderAccount, TraderAccountDropdownProps } from '../../utils/dexterityTypes';
 
 const TraderAccountDropdown: FC<TraderAccountDropdownProps> = ({ accounts, onSelect }) => {
     return (
