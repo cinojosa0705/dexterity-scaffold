@@ -1,7 +1,7 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 import { useNetworkConfiguration } from "./NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { ManifestContextProps, OrderData, Product, ProductContextProps, TraderContextProps } from "utils/dexterityTypes";
+import { ManifestContextProps, Product, ProductContextProps, TraderContextProps } from "utils/dexterityTypes";
 
 const ManifestContext = createContext<ManifestContextProps | undefined>(undefined);
 

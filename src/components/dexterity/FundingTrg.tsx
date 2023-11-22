@@ -42,7 +42,6 @@ export const FundingTrader: FC = () => {
 
     const handleWithdraw = useCallback(async () => {
         if (!amount || !publicKey || !manifest) return;
-
         try {
             setIsLoading(true);
             setWithdrawStatus('processing');
