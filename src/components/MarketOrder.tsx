@@ -41,7 +41,7 @@ export const PlaceMarketOrder: FC = () => {
                 priceFraction,
                 sizeFraction,
                 false,
-                new PublicKey(referralTrg),
+                referralTrg ? new PublicKey(referralTrg) : null,
                 35,
                 null,
                 null,
@@ -51,6 +51,7 @@ export const PlaceMarketOrder: FC = () => {
         } catch (error: any) {
             setIsSuccess(false);
             notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
+            console.error(error)
         } finally {
             notify({ type: 'success', message: `Market ${orderType} Order Placed Successfully!` });
             setIsLoading(false);

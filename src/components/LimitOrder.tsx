@@ -41,7 +41,7 @@ export const PlaceLimitOrder: FC = () => {
                 priceFraction,
                 sizeFraction,
                 false,
-                new PublicKey(referralTrg),
+                referralTrg ? new PublicKey(referralTrg) : null,
                 Number(process.env.NEXT_PUBLIC_REFERRER_BPS!),
                 null,
                 null,

@@ -2,6 +2,7 @@ import React, { ReactNode, createContext, useContext, useState } from "react";
 import dexterityTs from '@hxronetwork/dexterity-ts'
 import { useNetworkConfiguration } from "./NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { env } from "node:process";
 export const dexterity = dexterityTs
 
 interface ManifestContextProps {
@@ -162,8 +163,8 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   // if (devnet) BITCCOIN MPG; else if (mainnet) MAJORS MPG
   let defaultMpg =
-    network == 'devnet' ? 'HyWxreWnng9ZBDPYpuYugAfpCMkRkJ1oz93oyoybDFLB' :
-      network == 'mainnet-beta' ? '4cKB5xKtDpv4xo6ZxyiEvtyX3HgXzyJUS1Y8hAfoNkMT' : null;
+    network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_MPG :
+      network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_MPG : null;
 
   let defaultProduct: Product = {
     index: 0,
