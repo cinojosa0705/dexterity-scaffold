@@ -20,7 +20,7 @@ const TraderAccountDropdown: FC<TraderAccountDropdownProps> = ({ accounts, onSel
 
 export const SelectTraderAccounts: FC = () => {
     const { publicKey } = useWallet();
-    const { manifest } = useManifest();  // Assuming createTRG is the function to create a new TRG
+    const { manifest } = useManifest();
     const [trgsArr, setTrgsArr] = useState<TraderAccount[]>([]);
     const [selectedTrg, setSelectedTrg] = useState<string>('');
     const { setTrader } = useTrader()
@@ -34,9 +34,7 @@ export const SelectTraderAccounts: FC = () => {
         if (!publicKey) {console.log('publicKey error');return};
         if (!manifest) {console.log('manifest error');return};
         if (!manifest.fields) {console.log('manifest.fields error');return};
-        if (!manifest.fields.wallet) {console.log('manifest.fields.wallet error');return};
         if (!manifest.fields.wallet.publicKey) {console.log('manifest.fields.wallet.publicKey error');return};
-
         try {
             const trgs = await manifest.getTRGsOfOwner(publicKey, new PublicKey(mpgPubkey));
             setTrgsArr(trgs);
@@ -59,8 +57,6 @@ export const SelectTraderAccounts: FC = () => {
         setSelectedTrg(selectedValue);
         console.log({ selectedValue })
         const trader = new dexterity.Trader(manifest, new PublicKey(selectedValue))
-        const trg = await manifest.getTRG(new PublicKey(selectedValue))
-        console.log('Huh ', { trg })
         await trader.update()
         await manifest.updateOrderbooks(new PublicKey(mpgPubkey));
         setTrader(trader)
