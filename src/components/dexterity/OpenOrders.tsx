@@ -22,7 +22,7 @@ export const OpenOrders: FC = () => {
         } catch (error) {
             notify({type: 'error', message: `Error canceling all orders, ${error}`})
         } finally {
-            notify({type: 'success', message: `Canceled all orders`, txid: response[0] })
+            notify({type: 'success', message: `Canceled all orders` })
         }
         setRequested(false)
     }, [])
