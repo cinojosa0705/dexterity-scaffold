@@ -7,17 +7,6 @@ import { formatPubKey, handleCopy } from 'utils/util';
 import Button from '../Button';
 import { dexterity, TraderAccount, TraderAccountDropdownProps } from '../../utils/dexterityTypes';
 
-const TraderAccountDropdown: FC<TraderAccountDropdownProps> = ({ accounts, onSelect }) => {
-    return (
-        <select onChange={(e) => onSelect(e.target.value)} className='text-black text-xl'>
-            <option value="default">Select a Trader Account</option>
-            {accounts.map((trg, index) => (
-                <option key={index} value={trg.pubkey.toBase58()}>{formatPubKey(trg.pubkey.toBase58())}</option>
-            ))}
-        </select>
-    );
-};
-
 export const SelectTraderAccounts: FC = () => {
     const { publicKey } = useWallet();
     const { manifest } = useManifest();
@@ -35,17 +24,22 @@ export const SelectTraderAccounts: FC = () => {
         if (!manifest) {console.log('manifest error');return};
         if (!manifest.fields) {console.log('manifest.fields error');return};
         if (!manifest.fields.wallet.publicKey) {console.log('manifest.fields.wallet.publicKey error');return};
+
         try {
-            const trgs = await manifest.getTRGsOfOwner(publicKey, new PublicKey(mpgPubkey));
-            setTrgsArr(trgs);
+
+            // TRG Fetching
+
         } catch (error: any) {
             notify({ type: 'error', message: `Selecting Trader Account failed!`, description: error?.message });
         }
+
     }, [publicKey, manifest]);
 
     const handleCreateTRG = useCallback(async () => {
         try {
-            await manifest.createTrg(new PublicKey(mpgPubkey));
+
+            // TRG Creation
+
             fetchTraderAccounts();
         } catch (error: any) {
             notify({ type: 'error', message: `Creating Trader Account failed!`, description: error?.message });
@@ -53,13 +47,9 @@ export const SelectTraderAccounts: FC = () => {
     }, [fetchTraderAccounts, manifest]);
 
     const handleSelection = useCallback(async (selectedValue: string) => {
-        if (selectedValue == "default") return
-        setSelectedTrg(selectedValue);
-        console.log({ selectedValue })
-        const trader = new dexterity.Trader(manifest, new PublicKey(selectedValue))
-        await trader.update()
-        await manifest.updateOrderbooks(new PublicKey(mpgPubkey));
-        setTrader(trader)
+
+            // TRG Selection & Initiation
+
     }, [manifest, setTrader]);
 
     return (
@@ -95,5 +85,15 @@ export const SelectTraderAccounts: FC = () => {
             )}
         </div>
     );
-    
+};
+
+const TraderAccountDropdown: FC<TraderAccountDropdownProps> = ({ accounts, onSelect }) => {
+    return (
+        <select onChange={(e) => onSelect(e.target.value)} className='text-black text-xl'>
+            <option value="default">Select a Trader Account</option>
+            {accounts.map((trg, index) => (
+                <option key={index} value={trg.pubkey.toBase58()}>{formatPubKey(trg.pubkey.toBase58())}</option>
+            ))}
+        </select>
+    );
 };

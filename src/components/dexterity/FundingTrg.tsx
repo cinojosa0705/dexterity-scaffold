@@ -15,23 +15,12 @@ export const FundingTrader: FC = () => {
     const [depositStatus, setDepositStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
     const [withdrawStatus, setWithdrawStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
 
-    const callbacks = {
-        onGettingBlockHashFn: () => notify({ type: 'waiting', message: 'Fetching BlockHash...' }),
-        onGotBlockHashFn: () => notify({ type: 'success', message: 'Got BlockHash!' }),
-        onConfirm: async(txn: string) => {
-            notify({ type: 'success', message: 'Deposited successfully into trader account!', txid: txn });
-            setDepositStatus('success');
-            setInterval(() => setDepositStatus('idle'), 5_000)
-            console.log('HERE CONFIRMED')
-        }
-    };
-
     const handleDeposit = useCallback(async () => {
         if (!amount || !publicKey || !manifest) return;
         try {
-            setIsLoading(true);
-            setDepositStatus('processing');
-            await trader.deposit(dexterity.Fractional.New(amount, 0), callbacks);
+
+          // Deposit
+
         } catch (error: any) {
             setDepositStatus('failed');
             notify({ type: 'error', message: 'Deposit failed!', description: error?.message });
@@ -43,18 +32,16 @@ export const FundingTrader: FC = () => {
     const handleWithdraw = useCallback(async () => {
         if (!amount || !publicKey || !manifest) return;
         try {
-            setIsLoading(true);
-            setWithdrawStatus('processing');
-            await trader.withdraw(dexterity.Fractional.New(amount, 0));
-            setWithdrawStatus('success');
-            setInterval(() => setWithdrawStatus('idle'), 5_000)
+
+          // Withdraw
+
         } catch (error: any) {
             setWithdrawStatus('failed');
             notify({ type: 'error', message: 'Withdrawal failed!', description: error?.message });
         } finally {
-            notify({ type: 'success', message: 'Withdrawn successfully from trader account!' });
             setIsLoading(false);
         }
+
     }, [amount, publicKey, manifest, trader, selectedProduct]);
 
     return (

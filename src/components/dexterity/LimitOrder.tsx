@@ -30,33 +30,8 @@ export const PlaceLimitOrder: FC = () => {
     const handlePlaceOrder = useCallback(async () => {
         if (!price || !size || !publicKey || !manifest || !selectedProduct) return;
 
-        const priceFraction = dexterity.Fractional.New(price, 0);
-        const sizeFraction = dexterity.Fractional.New(size * 10 ** selectedProduct.exponent, selectedProduct.exponent);
-        const referralTrg = network === 'devnet' ? process.env.NEXT_PUBLIC_REFERRER_TRG_DEVNET! : process.env.NEXT_PUBLIC_REFERRER_TRG_MAINNET!
-        const referralFee = process.env.NEXT_PUBLIC_REFERRER_BPS
+        // Placing order logic goes here
 
-        try {
-            setIsLoading(true);
-            await trader.newOrder(
-                selectedProduct.index,
-                orderType === 'Short' ? false : true,
-                priceFraction,
-                sizeFraction,
-                false,
-                referralTrg ? new PublicKey(referralTrg) : null,
-                referralFee ? Number(referralFee) : null,
-                null,
-                null,
-                callbacks
-            );
-            setIsSuccess(true);
-        } catch (error: any) {
-            setIsSuccess(false);
-            notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
-        } finally {
-            notify({ type: 'success', message: `Limit ${orderType} Order Placed Successfully!` });
-            setIsLoading(false);
-        }
     }, [price, size, orderType, publicKey, manifest, trader, selectedProduct]);
 
     const isFormValid = useMemo(() => price !== null && size !== null && orderType !== 'None', [price, size, orderType]);

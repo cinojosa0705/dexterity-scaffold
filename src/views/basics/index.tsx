@@ -8,7 +8,7 @@ import { DefaultInfo } from "components/DefaultInfo";
 import { PlaceLimitOrder } from "components/dexterity/LimitOrder";
 import { FundingTrader } from "components/dexterity/FundingTrg";
 import { clusterApiUrl } from "@solana/web3.js";
-import { AccountInfo } from "components/AccountInfo";
+import { AccountInfo } from "components/dexterity/AccountInfo";
 import { OpenOrders } from "components/dexterity/OpenOrders";
 import { useNetworkConfiguration } from "contexts/NetworkConfigurationProvider";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
@@ -24,18 +24,13 @@ export const BasicsView: FC = ({ }) => {
 
   useMemo(async () => {
     if (!publicKey) return
-    const DexWallet: DexterityWallet = {
-      publicKey: publicKey!,
-      signTransaction,
-      signAllTransactions,
-    }
     const rpc =
       network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_RPC! :
         network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_RPC! :
           clusterApiUrl(network)
-    const manifest = await dexterity.getManifest(rpc, true, DexWallet);
-    console.log('Manifest: ', manifest)
-    setManifest(manifest);
+
+    // Fetch for the Manifest
+
   }, [publicKey, network]);
 
   useEffect(() => { }, [trader, setIndexPrice, setMarkPrice])
@@ -49,7 +44,6 @@ export const BasicsView: FC = ({ }) => {
         <div className="text-center">
           <DefaultInfo />
           <SelectTraderAccounts />
-          {trader &&
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
               <div className="col-span-1 md:col-span-1 lg:col-span-1">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -66,7 +60,6 @@ export const BasicsView: FC = ({ }) => {
                 <div className="mt-4"><AccountInfo /></div>
               </div>
             </div>
-          }
         </div>
       </div>
     </div>
