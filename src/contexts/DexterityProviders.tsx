@@ -167,10 +167,10 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
       network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_MPG : null;
 
   let defaultProduct: Product = {
-    index: 0,
-    name: 'BTCUSD-PERP',
-    minSize: 0.0001,
-    exponent: 4,
+    index: 1,
+    name: 'ZDF',
+    minSize: 1,
+    exponent: 0,
   }
 
   const [mpgPubkey, setMpgPubkey] = useState(defaultMpg)

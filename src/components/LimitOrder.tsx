@@ -51,6 +51,7 @@ export const PlaceLimitOrder: FC = () => {
         } catch (error: any) {
             setIsSuccess(false);
             notify({ type: 'error', message: 'Placing order failed!', description: error?.message });
+            console.error(error)
         } finally {
             notify({ type: 'success', message: `Limit ${orderType} Order Placed Successfully!` });
             setIsLoading(false);

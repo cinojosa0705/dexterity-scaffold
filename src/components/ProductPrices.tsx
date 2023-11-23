@@ -10,14 +10,18 @@ export const ProductPrices: FC = () => {
 
     const updatePrices = useCallback(async() => {
             for (const [productName, obj] of dexterity.Manifest.GetProductsOfMPG(trader.mpg)) {
-              if (!productName.includes(selectedProduct.name)) {
+              const { index: productIndex, product } = obj;
+
+              if (productIndex != selectedProduct.index) {
                   continue;
               }
-              const { index: productIndex, product } = obj;
+
               const meta = dexterity.productToMeta(product);
+
               if (meta.productKey.equals(UNINITIALIZED)) {
                   continue;
               }
+
               if (product.combo?.combo) {
                   continue;
               }
