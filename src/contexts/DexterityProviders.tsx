@@ -98,9 +98,9 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   let defaultProduct: Product = {
     index: 0,
-    name: 'BTCUSD-PERP',
-    minSize: 0.0001,
-    exponent: 4,
+    name: 'SOLUSD-PERP',
+    minSize: 0.1,
+    exponent: 1,
   }
 
   const [mpgPubkey, setMpgPubkey] = useState(defaultMpg)
