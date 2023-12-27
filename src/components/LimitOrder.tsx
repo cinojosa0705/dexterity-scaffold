@@ -23,7 +23,7 @@ export const PlaceLimitOrder: FC = () => {
     const callbacks = {
         onGettingBlockHashFn: () => {},
         onGotBlockHashFn: () => {},
-        onConfirm: (txn: string) => notify({ type: 'success', message: 'Order Placed Successfully!', txid: txn })
+        onTxSentFn: (txn: string) => notify({ type: 'success', message: 'Order Placed Successfully!', txid: txn })
     }
 
     const handlePlaceOrder = useCallback(async () => {
@@ -35,7 +35,8 @@ export const PlaceLimitOrder: FC = () => {
 
         try {
             setIsLoading(true);
-            await trader.newOrder(
+            await trader.updateMarkPrices()
+            const orderIx =  trader.getNewOrderIx(
                 selectedProduct.index,
                 orderType === 'Short' ? false : true,
                 priceFraction,
@@ -45,8 +46,8 @@ export const PlaceLimitOrder: FC = () => {
                 Number(process.env.NEXT_PUBLIC_REFERRER_BPS!),
                 null,
                 null,
-                callbacks
             );
+            await trader.sendTx([orderIx], callbacks)
             setIsSuccess(true);
         } catch (error: any) {
             setIsSuccess(false);

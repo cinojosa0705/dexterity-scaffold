@@ -49,7 +49,7 @@ export const AccountInfo: FC = () => {
         const allTimePnl = Number(trader.getPnL())
         const positions = Array.from(trader.getPositions())
 
-        setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name]))))
+        setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name.trim()]))))
         
         setPositionsData(positions)
         setCashBalance(cashBalance)

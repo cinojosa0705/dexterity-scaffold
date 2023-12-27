@@ -35,6 +35,7 @@ export const PlaceMarketOrder: FC = () => {
 
         try {
             setIsLoading(true);
+            await trader.updateMarkPrices()
             await trader.newOrder(
                 selectedProduct.index,
                 orderType === 'Short' ? false : true,

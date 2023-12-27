@@ -4,21 +4,6 @@ import Button from "./Button";
 import { timeSince } from "utils/util";
 import { notify } from "utils/notifications";
 
-type BigNumber = {
-    m: string;
-    exp: string;
-    _isNan: boolean;
-};
-
-type OrderData = {
-    id: string;
-    productName: string;
-    productIndex: number;
-    price: BigNumber;
-    qty: BigNumber;
-    isBid: boolean;
-};
-
 export const OpenOrders: FC = () => {
     const {
         orderData, // ordeData: OrderData[]
@@ -63,7 +48,7 @@ export const OpenOrders: FC = () => {
                                     {orderData.map((order, index) => (
                                         <tr key={index}>
                                             <td>{order.productName}</td>
-                                            <td>{parseFloat(order.price.m) * Math.pow(10, parseInt(order.price.exp))}</td>
+                                            <td>{parseFloat(order.price.m) / Math.pow(10, selectedProduct.exponent * 2)}</td>
                                             <td>{parseFloat(order.qty.m) / Math.pow(10, parseInt(order.qty.exp))}</td>
                                             <td>{order.isBid ? 'Bid' : 'Ask'}</td>
                                         </tr>
