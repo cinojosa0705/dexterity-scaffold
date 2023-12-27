@@ -56,6 +56,7 @@ export const PlaceLimitOrder: FC = () => {
             notify({ type: 'success', message: `Limit ${orderType} Order Placed Successfully!` });
             setIsLoading(false);
         }
+        
     }, [price, size, orderType, publicKey, manifest, trader, selectedProduct]);
 
     const isFormValid = useMemo(() => price !== null && size !== null && orderType !== 'None', [price, size, orderType]);

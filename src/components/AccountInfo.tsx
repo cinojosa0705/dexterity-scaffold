@@ -50,6 +50,7 @@ export const AccountInfo: FC = () => {
         const positions = Array.from(trader.getPositions())
 
         setOrderData(Array.from(await Promise.all(trader.getOpenOrders([selectedProduct.name]))))
+        
         setPositionsData(positions)
         setCashBalance(cashBalance)
         setOpenPositionsValue(openPositionsValue)

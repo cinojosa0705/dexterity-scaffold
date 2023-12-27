@@ -146,8 +146,8 @@ export interface Product {
 interface ProductContextProps {
   mpgPubkey: string;
   setMpgPubkey: React.Dispatch<React.SetStateAction<string>>;
-  selectedProduct: Product;
-  setSelectedProductIndex: React.Dispatch<React.SetStateAction<Product>>;
+  selectedProduct: Product | null;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
   indexPrice: number;
   setIndexPrice: React.Dispatch<React.SetStateAction<number>>;
   markPrice: number;
@@ -161,29 +161,20 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
   const { networkConfiguration } = useNetworkConfiguration();
   const network = networkConfiguration as WalletAdapterNetwork;
 
-  // if (devnet) BITCCOIN MPG; else if (mainnet) MAJORS MPG
   let defaultMpg =
     network == 'devnet' ? process.env.NEXT_PUBLIC_DEVNET_MPG :
       network == 'mainnet-beta' ? process.env.NEXT_PUBLIC_MAINNET_MPG : null;
 
-  let defaultProduct: Product = {
-    index: 0,
-    name: 'SOLUSD-PERP',
-    minSize: 0.1,
-    exponent: 1,
-  }
-
   const [mpgPubkey, setMpgPubkey] = useState(defaultMpg)
-  const [selectedProduct, setSelectedProductIndex] = useState(defaultProduct)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [indexPrice, setIndexPrice] = useState(0)
   const [markPrice, setMarkPrice] = useState(0)
 
   return (
-    <ProductContext.Provider value={{ mpgPubkey, setMpgPubkey, selectedProduct, setSelectedProductIndex, indexPrice, setIndexPrice, markPrice, setMarkPrice }}>
+    <ProductContext.Provider value={{ mpgPubkey, setMpgPubkey, selectedProduct, setSelectedProduct, indexPrice, setIndexPrice, markPrice, setMarkPrice }}>
       {children}
     </ProductContext.Provider>
   );
-
 }
 
 export const useProduct = () => {
