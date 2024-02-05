@@ -60,7 +60,7 @@ export const AccountInfo: FC = () => {
         setAccountHealth(accountHealth)
         setAllTimePnl(allTimePnl)
         setUpdated(true)
-        setAccountLeverage(portfolioValue / initialMarginReq)
+        setAccountLeverage(portfolioValue / (initialMarginReq + cashBalance)
         setLastUpdated(Date.now())
     }, [trader, selectedProduct]); // Removed markPrice and indexPrice
 
